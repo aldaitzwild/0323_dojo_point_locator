@@ -10,7 +10,11 @@
                     <tr>
                         {% for j in 0..9 %}
                             <td>
-                                <a href="{{path('app_cell', {'line': i, 'column': j})}}">Voir</a>
+                                {% if cells[i][j].isHidden == false %}
+                                    <i class="bi bi-{{ cells[i][j].value }}" style="font-size: 47pt;"></i>
+                                {% else %}
+                                    <a href="{{path('app_cell', {'line': i, 'column': j})}}">Voir</a>
+                                {% endif %}
                             </td>
                         {% endfor %}
                     </tr>

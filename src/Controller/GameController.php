@@ -11,9 +11,17 @@ class GameController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
     #[Route('/game', name: 'app_game')]
-    public function play(): Response
+    public function play(CellRepository $cellRepository): Response
     {
+        $cells = $cellRepository->findAll();
+        $cellArray = [];
+
+        foreach($cells as $cell) {
+            $cellArray[$cell->getLine()][$cell->getCol()] = $cell;
+        }
+
         return $this->render('game/index.html.twig', [
+            'cells' => $cellArray
         ]);
     }
 
@@ -21,8 +29,9 @@ class GameController extends AbstractController
     public function showCell(int $line, int $column, CellRepository $cellRepository): Response
     {
         $cell = $cellRepository->findOneBy(['line' => $line, 'col' => $column]);
-        return $this->render('game/cell.html.twig', [
-            'cell' => $cell
-        ]);
+        $cell->setIsHidden(false);
+        $cellRepository->save($cell, true);
+
+        return $this->redirectToRoute('app_game');
     }
 }
