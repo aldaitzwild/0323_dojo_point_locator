@@ -1,0 +1,21 @@
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap-icons/font/bootstrap-icons";
+
+body {
+    background-color: lightgray;
+}
+
+main {
+    min-height: 100vh;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    border: 3px solid black;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+}

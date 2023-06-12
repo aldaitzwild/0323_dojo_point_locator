@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Point Locator{% endblock %}
+
+{% block body %}
+    <main class="container bg-light">
+        <div class="d-flex justify-content-center">
+            <table class="mt-5">
+                {% for i in 0..9 %}
+                    <tr>
+                        {% for j in 0..9 %}
+                            <td>
+                                <a href="{{path('app_cell', {'line': i, 'column': j})}}">Voir</a>
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </main>
+{% endblock %}
