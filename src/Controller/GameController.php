@@ -6,9 +6,11 @@ use App\Repository\CellRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class GameController extends AbstractController
 {
+    #[IsGranted('ROLE_USER')]
     #[Route('/', name: 'app_home')]
     #[Route('/game', name: 'app_game')]
     public function play(CellRepository $cellRepository): Response
@@ -25,6 +27,7 @@ class GameController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/game/cell/{line}/{column}', name: 'app_cell')]
     public function showCell(int $line, int $column, CellRepository $cellRepository): Response
     {
